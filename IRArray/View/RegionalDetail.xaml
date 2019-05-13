@@ -1,0 +1,442 @@
+﻿<UserControl x:Class="IRArray.RegionalDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IRArray"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="300" Height="986" Width="344">
+    <UserControl.Resources>
+        <!-- 物件 -->
+        <SolidColorBrush x:Key="Obj_Backgroud" Color="#FF828CB8"/>
+        <SolidColorBrush x:Key="Obj_Foreground" Color="#FFB8BEE8"/>
+        <SolidColorBrush x:Key="Obj_BorderBrush" Color="#FF828CB8"/>
+        <!-- 顏色 -->
+        <SolidColorBrush x:Key="Green" Color="#FF57B56C"/>
+        <SolidColorBrush x:Key="White" Color="#FFFFFFFF"/>
+        <!-- 漸層 -->
+        <LinearGradientBrush x:Key="Obj_LinearBackgroud" StartPoint="1,0" EndPoint="1,1">
+            <GradientStop Color="#FF475489" Offset="0.0" />
+            <GradientStop Color="#FF2E3A68" Offset="1.0" />
+        </LinearGradientBrush>
+        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+            <!--<EventSetter Event="Button.Click" Handler="RadioButton_Click"/>-->
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="56"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="{DynamicResource Obj_Foreground}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="Image" Grid.Column="0" Height="20" Source="../Image/icon_checkbox_off.png"/>
+                            <ContentPresenter Grid.Column="2" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="../Image/icon_multiple_choice_on.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <!--<EventSetter Event="Button.Click" Handler="RadioButton_MouseDown"/>-->
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="{DynamicResource Obj_Foreground}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="Image" Grid.Column="0" Height="20" Source="../Image/icon_checkbox_off.png"/>
+                            <ContentPresenter Grid.Column="2" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="../Image/icon_checkbox_on.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SwitchStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Height" Value="56"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="Image" Grid.Column="0" Height="28" Source="../Image/switch_off.png"/>
+                            <ContentPresenter Grid.Column="2" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Image" Property="Source" Value="../Image/switch_on.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Border x:Name="Border" Background="Transparent" BorderBrush="{DynamicResource Obj_BorderBrush}" BorderThickness="1" CornerRadius="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Height="6" Source="../Image/com_icon_arrow_down_n.png"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ComboBoxToggleButton1" TargetType="{x:Type ToggleButton}">
+            <Border x:Name="Border" Background="{DynamicResource Obj_LinearBackgroud}" BorderBrush="{DynamicResource Obj_BorderBrush}" BorderThickness="1" CornerRadius="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="24"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Height="24" Source="../Image/com_icon_flat_arrow_down.png"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}"/>
+        </ControlTemplate>
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="52"/>
+            <Setter Property="DisplayMemberPath" Value="Text"/>
+            <Setter Property="SelectedValuePath" Value="Value"/>
+            <Setter Property="SelectedIndex" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="EditStates">
+                                    <VisualState x:Name="Editable"/>
+                                    <VisualState x:Name="Uneditable"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ToggleButton x:Name="ToggleButton" Grid.Column="2" Template="{StaticResource ComboBoxToggleButton}" Focusable="False" ClickMode="Press"
+                            IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ContentPresenter x:Name="ContentSite" Margin="10,3" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="False"
+                            TextBlock.Foreground="{DynamicResource White}"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}">
+                            </ContentPresenter>
+                            <TextBox x:Name="PART_EditableTextBox" Style="{x:Null}"
+                            Margin="3,3,23,3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Focusable="True" Background="Transparent" Visibility="Hidden"
+                            Template="{StaticResource ComboBoxTextBox}"
+                            IsReadOnly="{TemplateBinding IsReadOnly}" />
+                            <Popup x:Name="Popup" Placement="Bottom" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide"
+                            IsOpen="{TemplateBinding IsDropDownOpen}">
+                                <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" BorderThickness="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
+                                        </Border.BorderBrush>
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{DynamicResource ControlLightColor}" />
+                                        </Border.Background>
+                                    </Border>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder"  Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="2" />
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ComboBoxStyle1" BasedOn="{StaticResource ComboBoxStyle}" TargetType="{x:Type ComboBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="EditStates">
+                                    <VisualState x:Name="Editable"/>
+                                    <VisualState x:Name="Uneditable"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ToggleButton x:Name="ToggleButton" Grid.Column="2" Template="{StaticResource ComboBoxToggleButton1}" Focusable="False" ClickMode="Press"
+                            IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ContentPresenter x:Name="ContentSite" Margin="10,3" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="False"
+                            TextBlock.Foreground="{DynamicResource White}"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}">
+                            </ContentPresenter>
+                            <TextBox x:Name="PART_EditableTextBox" Style="{x:Null}"
+                            Margin="3,3,23,3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Focusable="True" Background="Transparent" Visibility="Hidden"
+                            Template="{StaticResource ComboBoxTextBox}"
+                            IsReadOnly="{TemplateBinding IsReadOnly}" />
+                            <Popup x:Name="Popup" Placement="Bottom" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide"
+                            IsOpen="{TemplateBinding IsDropDownOpen}">
+                                <Grid x:Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" BorderThickness="1">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{DynamicResource BorderMediumColor}" />
+                                        </Border.BorderBrush>
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{DynamicResource ControlLightColor}" />
+                                        </Border.Background>
+                                    </Border>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder"  Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="2" />
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Border" Padding="2" SnapsToDevicePixels="True" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Selected"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter/>
+                                <Image Name="Image" Grid.Column="1" HorizontalAlignment="Right" Height="14" Width="14" Source="../Image/icon_pulldown_check_n.png" Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Visibility" TargetName="Image" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Panel.Background" TargetName="Border" Value="{DynamicResource Green}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="Border" Value="{DynamicResource Obj_Foreground}"/>
+                                <Setter TargetName="Image" Property="Source" Value="../Image/icon_pulldown_check_hover.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="PHTextBoxStyle" TargetType="{x:Type local:PHTextBox}">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="128"/>
+            <Setter Property="ObjBorderBrush" Value="{DynamicResource Obj_BorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Obj_Foreground}"/>
+            <Setter Property="FocusBrush" Value="{DynamicResource Green}"/>
+            <Setter Property="Placeholder" Value="请输入"/>
+            <Setter Property="ObjToggleSize" Value="28"/>
+            <Setter Property="ImageSize" Value="14"/>
+            <Setter Property="Source" Value="../Image/com_icon_empty_n.png"/>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Width" Value="128"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Content" Value="保存"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="{DynamicResource Green}" CornerRadius="2">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.Foreground="{DynamicResource Btn_Foreground}" RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle1" BasedOn="{StaticResource ButtonStyle}" TargetType="{x:Type Button}">
+            <Setter Property="Content" Value="取消"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="Transparent" BorderBrush="{DynamicResource Obj_BorderBrush}" BorderThickness="1" CornerRadius="2">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.Foreground="{DynamicResource White}" RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle3" TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Content" Value="刪除"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="{DynamicResource Obj_LinearBackgroud}" CornerRadius="2">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.Foreground="{DynamicResource Btn_Foreground}" RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type local:Period}">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="6"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="6"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="84"/>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="42"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="区域名称" Foreground="{DynamicResource Obj_Foreground}"/>
+            <local:PHTextBox x:Name="PHTextBox1" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Width="Auto" Placeholder="区域名称" Style="{DynamicResource PHTextBoxStyle}"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="检测功能" Foreground="{DynamicResource Obj_Foreground}"/>
+            <CheckBox x:Name="CheckBox1" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{DynamicResource SwitchStyle}"/>
+            <Separator Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Foreground="{DynamicResource Obj_Foreground}" Opacity="0.1"/>
+            <TextBlock Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Text="区域时间" Foreground="{DynamicResource Obj_Foreground}"/>
+            <Grid Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="PeriodAdd" Grid.Column="0" Height="20" Source="../Image/icon_add_n.png" Cursor="Hand"/>
+                <Button x:Name="PeriodRemove" Grid.Column="1" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle3}" Visibility="Hidden"/>
+            </Grid>
+            <StackPanel x:Name="PeriodContainer" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Orientation="Vertical"/>
+            <Separator Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Foreground="{DynamicResource Obj_Foreground}" Opacity="0.1"/>
+            <CheckBox x:Name="CheckBox2" Grid.Column="1"  Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Center" Content="移动事件侦测" Foreground="{DynamicResource Obj_Foreground}" Style="{DynamicResource CheckBoxStyle}"/>
+            <Grid Grid.Column="2" Grid.Row="6" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="10,0" VerticalAlignment="Center" Foreground="{DynamicResource Obj_Foreground}" Text="灵敏度"/>
+                <ComboBox x:Name="ComboBox1" Grid.Column="1" Style="{DynamicResource ComboBoxStyle1}"/>
+            </Grid>
+            <CheckBox x:Name="CheckBox3" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" Content="人数设定" Foreground="{DynamicResource Obj_Foreground}" Style="{DynamicResource CheckBoxStyle}"/>
+            <local:PHTextBox x:Name="PHTextBox2" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Right" Placeholder="上限200人" Style="{DynamicResource PHTextBoxStyle}" Keyboard.KeyUp="PHTextBox_KeyUp"/>
+            <CheckBox x:Name="CheckBox4" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" VerticalAlignment="Center" Content="温度警报设定" Foreground="{DynamicResource Obj_Foreground}" Style="{DynamicResource CheckBoxStyle}"/>
+            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" HorizontalAlignment="Right" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Margin="10,0" VerticalAlignment="Center" Foreground="{DynamicResource Obj_Foreground}" Text="最高温度 &gt;"/>
+                <local:PHTextBox x:Name="PHTextBox3" Grid.Column="2" Grid.Row="0" Placeholder="最高400°" Style="{DynamicResource PHTextBoxStyle}" Keyboard.KeyUp="PHTextBox_KeyUp"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="10,0" VerticalAlignment="Center" Foreground="{DynamicResource Obj_Foreground}" Text="最低温度 &lt;"/>
+                <local:PHTextBox x:Name="PHTextBox4" Grid.Column="2" Grid.Row="1" Placeholder="最低-30°" Style="{DynamicResource PHTextBoxStyle}" Keyboard.KeyUp="PHTextBox_KeyUp"/>
+            </Grid>
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="10" VerticalAlignment="Center" Text="持续时间设定" Foreground="{DynamicResource Obj_Foreground}"/>
+            <local:PHTextBox x:Name="PHTextBox5" Grid.Column="2" Grid.Row="10" HorizontalAlignment="Right" Placeholder="上限300秒" Style="{DynamicResource PHTextBoxStyle}" Keyboard.KeyUp="PHTextBox_KeyUp"/>
+            <TextBlock Grid.Column="1" Grid.Row="11" VerticalAlignment="Center" Text="EMail" Foreground="{DynamicResource Obj_Foreground}"/>
+            <local:PHTextBox x:Name="PHTextBox6" Grid.Column="2" Grid.Row="11" Width="Auto" MinLines="1" Placeholder="请输入Email" Style="{DynamicResource PHTextBoxStyle}"/>
+        </Grid>
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="30,0" VerticalAlignment="Bottom">
+            <Button x:Name="Cancel" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Style="{DynamicResource ButtonStyle1}"/>
+            <Button x:Name="Yes" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}"/>
+        </Grid>
+    </Grid>
+</UserControl>

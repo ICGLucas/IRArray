@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78EC784C-AFAF-4C50-ACD4-689C128D9642}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IRArray</RootNamespace>
+    <AssemblyName>IRArray</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>executable.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ColorMap.cs" />
+    <Compile Include="Control\ToggleSwitch.xaml.cs">
+      <DependentUpon>ToggleSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\TimeTextBox.xaml.cs">
+      <DependentUpon>TimeTextBox.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Control\ProgressRotate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\Period.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Device.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\ProgressRotate.xaml.cs">
+      <DependentUpon>ProgressRotate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataStruct.cs" />
+    <Compile Include="Control\Period.xaml.cs">
+      <DependentUpon>Period.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextPath.cs" />
+    <Compile Include="View\Device.xaml.cs">
+      <DependentUpon>Device.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IniConfig.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Control\ToggleSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\PHTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\PromptBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\TimeTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Preferences.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Regional.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RegionalDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Screen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MenuBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\PicRadio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Control\PHTextBox.xaml.cs">
+      <DependentUpon>PHTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PromptBox.xaml.cs">
+      <DependentUpon>PromptBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Preferences.xaml.cs">
+      <DependentUpon>Preferences.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Regional.xaml.cs">
+      <DependentUpon>Regional.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegionalDetail.xaml.cs">
+      <DependentUpon>RegionalDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Screen.xaml.cs">
+      <DependentUpon>Screen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MenuBar.xaml.cs">
+      <DependentUpon>MenuBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PicRadio.xaml.cs">
+      <DependentUpon>PicRadio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_connection_profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_pulldown_check_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\com_icon_arrow_down_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\com_icon_empty_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\com_icon_arrow_down_s.png" />
+    <Resource Include="Image\com_icon_arrow_up_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_error.png" />
+    <Resource Include="Image\icon_succeed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\com_icon_arrow_up_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_checkbox_off.png" />
+    <Resource Include="Image\icon_checkbox_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_preferences_n.png" />
+    <Resource Include="Image\icon_preferences_s.png" />
+    <Resource Include="Image\icon_regional_settings_n.png" />
+    <Resource Include="Image\icon_regional_settings_s.png" />
+    <Resource Include="Image\icon_screen_setup_n.png" />
+    <Resource Include="Image\icon_screen_setup_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\com_icon_flat_arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_multiple_choice_on.png" />
+    <Resource Include="Image\icon_pulldown_check_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\switch_off.png" />
+    <Resource Include="Image\switch_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_add_n.png" />
+    <Resource Include="Image\icon_add_p.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_close_active.png" />
+    <Resource Include="Image\icon_narrow_default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_close_default.png" />
+    <Resource Include="Image\icon_narrow_active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\icon_regional_settings_n Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="executable.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

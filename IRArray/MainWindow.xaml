@@ -1,0 +1,382 @@
+﻿<Window x:Class="IRArray.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IRArray"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowState="Normal">
+    <!--<Window.Effect>
+        <DropShadowEffect BlurRadius = "10" Color="Gray" ShadowDepth="2" Direction="-90"/>
+    </Window.Effect>-->
+    <Window.Resources>
+        <Style TargetType = "{x:Type Thumb}" >
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="thumb_PreviewMouseLeftButtonDown"/>
+            <Setter Property = "Background" Value="Red"/>
+            <Setter Property = "Opacity" Value="0"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="Grid.ColumnSpan" Value="3"/>
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="Grid.RowSpan" Value="2"/>
+        </Style>
+        <!-- 字體 -->
+        <Style TargetType="{x:Type Window}">
+            <!--<Setter Property="FontFamily" Value="Comic Sans MS"/>-->
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        <!-- 介面背景 -->
+        <SolidColorBrush x:Key="Backgroud" Color="#FF17224D"/>
+        <!-- Menu背景 -->
+        <SolidColorBrush x:Key="Menu_Backgroud" Color="#FF2B3763"/>
+        <!-- 物件 -->
+        <SolidColorBrush x:Key="Obj_Backgroud" Color="#FF828CB8"/>
+        <SolidColorBrush x:Key="Obj_Foreground" Color="#FFB8BEE8"/>
+        <SolidColorBrush x:Key="Obj_BorderBrush" Color="#FF828CB8"/>
+        <!-- 漸層 -->
+        <LinearGradientBrush x:Key="Obj_LinearBackgroud" StartPoint="1,0" EndPoint="1,1">
+            <GradientStop Color="#FF475489" Offset="0.0" />
+            <GradientStop Color="#FF2E3A68" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <!-- 按鍵 -->
+        <SolidColorBrush x:Key="Btn_Backgroud" Color="#FF57B56C"/>
+        <SolidColorBrush x:Key="Btn_Foreground" Color="#FFF2F3F3"/>
+        <!-- PromptBox -->
+        <SolidColorBrush x:Key="PromptBox_Foreground" Color="#FF2B3763"/>
+        <SolidColorBrush x:Key="PromptBox_Separator" Color="#FFDDDEE7"/>
+        <SolidColorBrush x:Key="PromptBox_BtnForeground" Color="#FF57B56C"/>
+
+        <!-- 顏色 -->
+        <SolidColorBrush x:Key="Green" Color="#FF57B56C"/>
+        <SolidColorBrush x:Key="White" Color="#FFFFFFFF"/>
+        <!--Control colors.-->
+        <Color x:Key="ControlLightColor">White</Color>
+        <!--Border colors-->
+        <Color x:Key="BorderMediumColor">#FF888888</Color>
+        <Style x:Key="MenuBarStyle" TargetType="{x:Type local:MenuBar}">
+            <Setter Property="Background" Value="{DynamicResource Menu_Backgroud}"/>
+        </Style>
+        <Style x:Key="DeviceStyle" TargetType="{x:Type local:Device}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="600"/>
+        </Style>
+        <Style x:Key="ScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollContentPresenter Grid.Column="0"/>
+                            <ScrollBar Grid.Column="1"
+                               Opacity="0.5"
+                               Width="0"                       
+                               MinWidth="0"
+                               Value="{TemplateBinding VerticalOffset}"
+                               Maximum="{TemplateBinding ScrollableHeight}"
+                               ViewportSize="{TemplateBinding ViewportHeight}"
+                               Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RadioButtonMainStyle" TargetType="{x:Type RadioButton}">
+            <EventSetter Event="Button.Click" Handler="RadioButton_Click"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="64"/>
+            <Setter Property="Width" Value="240"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <!--<Setter Property="Content" Value="主畫面"/>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="4"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="Rectangle1" Fill="{DynamicResource Green}" Grid.Row="0" Opacity="0"/>
+                            <Rectangle x:Name="Rectangle2" Fill="{DynamicResource Green}" Grid.Row="1" Opacity="0"/>
+                            <ContentPresenter x:Name="ContentPresenter" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.Foreground="{DynamicResource White}" Opacity="0.5"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Rectangle1" Property="Opacity" Value="0.2"/>
+                                <Setter TargetName="Rectangle2" Property="Opacity" Value="1"/>
+                                <Setter TargetName="ContentPresenter" Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonMainStyle1" BasedOn="{StaticResource RadioButtonMainStyle}" TargetType="{x:Type RadioButton}">
+            <Setter Property="Width" Value="214"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="Rectangle1" Fill="{DynamicResource Green}" Grid.Row="0" Opacity="0"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Margin="5,0" Height="48" Source="Image/icon_connection_profile.png"/>
+                                <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Center" TextBlock.Foreground="{DynamicResource White}" Opacity="1"/>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Rectangle1" Property="Opacity" Value="1"/>
+                                <Setter TargetName="ContentPresenter" Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TimeTextBoxStyle" TargetType="{x:Type local:TimeTextBox}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="88"/>
+            <Setter Property="ObjBorderBrush" Value="{DynamicResource Obj_BorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Obj_Foreground}"/>
+            <Setter Property="FocusBrush" Value="{DynamicResource Green}"/>
+            <Setter Property="ObjToggleSize" Value="28"/>
+            <Setter Property="ImageSize" Value="6"/>
+            <Setter Property="MaxValue" Value="86399"/>
+            <Setter Property="MinValue" Value="0"/>
+            <Setter Property="Value" Value="119"/>
+            <Setter Property="SourceUp" Value="Image/com_icon_arrow_up_n.png"/>
+            <Setter Property="SourceDown" Value="Image/com_icon_arrow_down_n.png"/>
+        </Style>
+
+        <Style x:Key="ImageStyle" TargetType="{x:Type Image}">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Source" Value="Image/icon_regional_settings_n Copy.png"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="0.4,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="0.8"/>
+        </Style>
+        <Style x:Key="PromptBoxStyle" TargetType="{x:Type local:PromptBox}">
+            <!--<Setter Property="MaxHeight" Value="214"/>
+            <Setter Property="MinHeight" Value="165"/>-->
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Source" Value="Image/icon_error.png"/>
+            <Setter Property="ObjText" Value="Wifi 連線異常"/>
+            <Setter Property="ObjForeground" Value="{DynamicResource PromptBox_Foreground}"/>
+            <Setter Property="BtnForeground1" Value="{DynamicResource PromptBox_BtnForeground}"/>
+            <Setter Property="IsConfirm1" Value="False"/>
+            <Setter Property="IsConfirm2" Value="False"/>
+        </Style>
+        <Style x:Key="PromptBoxStyle1" BasedOn="{StaticResource PromptBoxStyle}" TargetType="{x:Type local:PromptBox}">
+            <Setter Property="Source" Value="Image/icon_succeed.png"/>
+            <Setter Property="ObjText" Value="已保存"/>
+            <Setter Property="IsConfirm1" Value="False"/>
+            <Setter Property="IsConfirm2" Value="False"/>
+        </Style>
+        <Style x:Key="PromptBoxStyle2" BasedOn="{StaticResource PromptBoxStyle}" TargetType="{x:Type local:PromptBox}">
+            <Setter Property="Source" Value="Image/icon_error.png"/>
+            <Setter Property="ObjText" Value="取消"/>
+            <Setter Property="ObjForeground" Value="{DynamicResource PromptBox_Foreground}"/>
+            <Setter Property="BtnForeground1" Value="{DynamicResource PromptBox_BtnForeground}"/>
+            <Setter Property="IsConfirm1" Value="False"/>
+            <Setter Property="IsConfirm2" Value="True"/>
+        </Style>
+    </Window.Resources>
+    <Border BorderBrush="Gray" BorderThickness="1">
+        <Grid x:Name="Grid" Background="{DynamicResource Backgroud}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--<Thumb x:Name="thumbHeader" Grid.RowSpan="1" Cursor="SizeAll" MouseDoubleClick="ThumbHeader_MouseDoubleClick"/>-->
+            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="222"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="211"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" HorizontalAlignment="Center" Height="18" Source="Image/logo.png"/>
+                <RadioButton x:Name="Main" Grid.Column="2" Width="240" Content="主画面" IsChecked="True" Style="{StaticResource RadioButtonMainStyle}"/>
+                <RadioButton x:Name="Setting" Grid.Column="3" Width="240" Content="显示输出设定" Style="{StaticResource RadioButtonMainStyle}"/>
+                <RadioButton x:Name="Devices" Grid.Column="5" Width="211" Content="连线设置" Style="{StaticResource RadioButtonMainStyle1}"/>
+                <Image x:Name="WinNarrow" Grid.Column="7">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Height" Value="32"/>
+                            <Setter Property="Source" Value="Image/icon_narrow_default.png"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Source" Value="Image/icon_narrow_active.png"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <Image x:Name="WinClose" Grid.Column="8">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Height" Value="32"/>
+                            <Setter Property="Source" Value="Image/icon_close_default.png"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Source" Value="Image/icon_close_active.png"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Grid>
+            <local:MenuBar x:Name="MenuBar" Grid.Column="0" Grid.Row="1" Width="222" Style="{DynamicResource MenuBarStyle}" Visibility="Collapsed"/>
+            <ScrollViewer x:Name="ScrollViewer1" Grid.Column="1" Grid.Row="1" Width="344" Visibility="Collapsed" Style="{DynamicResource ScrollViewerStyle}">
+                <Grid>
+                    <local:Screen x:Name="Screen" Visibility="Visible"/>
+                    <local:Regional x:Name="Regional" Visibility="Collapsed"/>
+                    <local:RegionalDetail x:Name="RegionalDetail" MaxHeight="1280" Visibility="Collapsed"/>
+                    <local:Preferences x:Name="Preferences" Visibility="Collapsed"/>
+                </Grid>
+            </ScrollViewer>
+            <Grid Grid.Column="2" Grid.Row="1" Background="{DynamicResource Menu_Backgroud}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="1">
+                    <Grid Background="#011480">
+                        <Image x:Name="Monitor" Height="24" Width="32" Source="{Binding Source}" ClipToBounds="True">
+                            <Image.Effect>
+                                <BlurEffect Radius="1" KernelType="Gaussian" RenderingBias="Performance"/>
+                            </Image.Effect>
+                        </Image>
+                        <Canvas Name="Canvas" Background="Transparent">
+                            <Path x:Name="PathRect" Fill="#3CA7FF00" Stroke="#A7FF00" StrokeThickness="0.1">
+                                <Path.Style>
+                                    <Style TargetType="{x:Type Path}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=Visibility,ElementName=ScrollViewer1}" Value="Visible"/>
+                                                    <Condition Binding="{Binding Path=Visibility,ElementName=RegionalDetail}" Value="Visible"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Path.Style>
+                            </Path>
+                            <Path x:Name="PathPoint" Fill="#0432FF" Stroke="#FFFFFF" StrokeThickness="0.05" >
+                                <Path.Style>
+                                    <Style TargetType="{x:Type Path}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=Visibility,ElementName=ScrollViewer1}" Value="Visible"/>
+                                                    <Condition Binding="{Binding Path=Visibility,ElementName=RegionalDetail}" Value="Visible"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Path.Style>
+                            </Path>
+                        </Canvas>
+                    </Grid>
+                </Viewbox>
+                <local:TextPath Grid.Column="1">
+                    <local:TextPath.Style>
+                        <Style TargetType="{x:Type local:TextPath}">
+                            <Setter Property="Margin" Value="40"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="Fill" Value="#FFFFFF"/>
+                            <Setter Property="Stroke" Value="#000000"/>
+                            <Setter Property="StrokeThickness" Value="0.2"/>
+                            <Setter Property="Control.Visibility" Value="{Binding Path=Visibility,ElementName=Monitor}"/>
+                            <Setter Property="Text">
+                                <Setter.Value>
+                                    <MultiBinding StringFormat="{}平均溫度 {0}  最高溫度 {1}  最低溫度 {2}  最大溫差 {3}  人數統計 {4}">
+                                        <Binding Path="Avg"/>
+                                        <Binding Path="High"/>
+                                        <Binding Path="Low"/>
+                                        <Binding Path="Diff"/>
+                                        <Binding Path="Person"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </local:TextPath.Style>
+                </local:TextPath>
+            </Grid>
+            <!--// Text="平均溫度 _  最高溫度 _  最低溫度 _  最大溫差 _  人數統計 _"-->
+            <ScrollViewer x:Name="ScrollViewer2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Visibility="Collapsed" Style="{DynamicResource ScrollViewerStyle}">
+                <Border Background="{DynamicResource Menu_Backgroud}">
+                    <local:Device x:Name="Device" Style="{DynamicResource DeviceStyle}"/>
+                </Border>
+            </ScrollViewer>
+            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="PromptBoxStackPanel" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3" Background="Transparent">
+                    <StackPanel.Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Control.Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Visibility,ElementName=PromptBox1}" Value="Visible">
+                                    <Setter Property="Control.Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=Visibility,ElementName=PromptBox2}" Value="Visible">
+                                    <Setter Property="Control.Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                </StackPanel>
+                <local:PromptBox x:Name="PromptBox1" Grid.Column="1" Grid.Row="1" Style="{DynamicResource PromptBoxStyle1}" Visibility="Collapsed"/>
+                <local:PromptBox x:Name="PromptBox2" Grid.Column="1" Grid.Row="1" Style="{DynamicResource PromptBoxStyle2}" Visibility="Collapsed"/>
+            </Grid>
+            <!--<Thumb x:Name="thumbTop" Margin="15,0" VerticalAlignment="Top" Height="5" Cursor="SizeNS"/>
+            <Thumb x:Name="thumbTopRight" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="15" Width="15" Cursor="SizeNESW"/>
+            <Thumb x:Name="thumbRight" Margin="0,15" HorizontalAlignment="Right" Width="5" Cursor="SizeWE"/>
+            <Thumb x:Name="thumbBottomRight" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="15" Width="15" Cursor="SizeNWSE"/>
+            <Thumb x:Name="thumbBottom" Margin="15,0" VerticalAlignment="Bottom" Height="5" Cursor="SizeNS"/>
+            <Thumb x:Name="thumbBottomLeft" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="15" Width="15" Cursor="SizeNESW"/>
+            <Thumb x:Name="thumbLeft" Margin="0,15" HorizontalAlignment="Left" Width="5" Cursor="SizeWE"/>
+            <Thumb x:Name="thumbTopLeft" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="15" Width="15" Cursor="SizeNWSE"/>-->
+        </Grid>
+    </Border>
+</Window>

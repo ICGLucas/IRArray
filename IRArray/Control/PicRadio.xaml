@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="IRArray.PicRadio"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IRArray"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="my">
+    <UserControl.Resources>
+        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="{Binding Path=ActualHeight,ElementName=my}"/>
+            <Setter Property="Width" Value="{Binding Path=ActualWidth,ElementName=my}"/>
+            <Setter Property="Content" Value="{Binding Path=Text,ElementName=my}"/>
+            <Setter Property="Background" Value="{Binding Path=ObjBackgroud,ElementName=my}"/>
+            <Setter Property="Foreground" Value="{Binding Path=ObjForeground,ElementName=my}"/>
+            <Setter Property="IsChecked" Value="{Binding Path=IsChecked,ElementName=my}"/>
+            <!--<Setter Property="Content" Value="畫面設定"/>
+            <Setter Property="Background" Value="#FF17224D"/>
+            <Setter Property="Foreground" Value="#FFB8BEE8"/>-->
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Border Background="{TemplateBinding Background}">
+                            <Grid HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="{Binding Path=Imagepace,ElementName=my}"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--<Image x:Name="ImageSource" Grid.Column="0" Height="24" Source="../Image/icon_screen_setup_n.png"/>-->
+                                <Image x:Name="ImageSource" Grid.Column="0" Height="{Binding Path=ImageSize,ElementName=my}" Source="{Binding Path=Source,ElementName=my}"/>
+                                <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsChecked,ElementName=my}" Value="True">
+                                <Setter TargetName="ImageSource" Property="Source" Value="{Binding Path=FocusSource,ElementName=my}"/>
+                                <Setter Property="Background" Value="{Binding Path=ObjFocusBackgroud,ElementName=my}"/>
+                                <Setter Property="Foreground" Value="{Binding Path=ObjFocusForeground,ElementName=my}"/>
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ImageSource" Property="Source" Value="{Binding Path=FocusSource,ElementName=my}"/>
+                                <Setter Property="Background" Value="{Binding Path=ObjFocusBackgroud,ElementName=my}"/>
+                                <Setter Property="Foreground" Value="{Binding Path=ObjFocusForeground,ElementName=my}"/>
+                                <!--<Setter Property="Background" Value="#FF2B3763"/>
+                                <Setter Property="Foreground" Value="#FFFFFFFF"/>-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <RadioButton Style="{DynamicResource RadioButtonStyle}"/>
+</UserControl>
