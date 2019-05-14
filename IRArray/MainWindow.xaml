@@ -351,16 +351,18 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel x:Name="PromptBoxStackPanel" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3" Background="Transparent">
+                <StackPanel x:Name="PromptBoxStackPanel" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="3">
                     <StackPanel.Style>
                         <Style TargetType="{x:Type StackPanel}">
-                            <Setter Property="Control.Visibility" Value="Collapsed" />
+                            <Setter Property="Background" Value="#000000"/>
+                            <Setter Property="Opacity" Value="0.5"/>
+                            <Setter Property="Control.Visibility" Value="Collapsed"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Path=Visibility,ElementName=PromptBox1}" Value="Visible">
-                                    <Setter Property="Control.Visibility" Value="Visible" />
+                                    <Setter Property="Control.Visibility" Value="Visible"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Path=Visibility,ElementName=PromptBox2}" Value="Visible">
-                                    <Setter Property="Control.Visibility" Value="Visible" />
+                                    <Setter Property="Control.Visibility" Value="Visible"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

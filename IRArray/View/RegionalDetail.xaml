@@ -31,7 +31,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="5"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Image x:Name="Image" Grid.Column="0" Height="20" Source="../Image/icon_checkbox_off.png"/>
@@ -57,7 +57,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="5"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Image x:Name="Image" Grid.Column="0" Height="20" Source="../Image/icon_checkbox_off.png"/>
@@ -383,7 +383,7 @@
                 <RowDefinition Height="42"/>
                 <RowDefinition Height="42"/>
                 <RowDefinition Height="42"/>
-                <RowDefinition Height="84"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="42"/>
                 <RowDefinition Height="42"/>
             </Grid.RowDefinitions>
@@ -405,6 +405,16 @@
             <Separator Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Foreground="{DynamicResource Obj_Foreground}" Opacity="0.1"/>
             <CheckBox x:Name="CheckBox2" Grid.Column="1"  Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Center" Content="移动事件侦测" Foreground="{DynamicResource Obj_Foreground}" Style="{DynamicResource CheckBoxStyle}"/>
             <Grid Grid.Column="2" Grid.Row="6" HorizontalAlignment="Right">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=CheckBox2,Path=IsChecked}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
@@ -415,7 +425,17 @@
             <CheckBox x:Name="CheckBox3" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" Content="人数设定" Foreground="{DynamicResource Obj_Foreground}" Style="{DynamicResource CheckBoxStyle}"/>
             <local:PHTextBox x:Name="PHTextBox2" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Right" Placeholder="上限200人" Style="{DynamicResource PHTextBoxStyle}" Keyboard.KeyUp="PHTextBox_KeyUp"/>
             <CheckBox x:Name="CheckBox4" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" VerticalAlignment="Center" Content="温度警报设定" Foreground="{DynamicResource Obj_Foreground}" Style="{DynamicResource CheckBoxStyle}"/>
-            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" HorizontalAlignment="Right" >
+            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" HorizontalAlignment="Right" Height="84">
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=CheckBox4,Path=IsChecked}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>

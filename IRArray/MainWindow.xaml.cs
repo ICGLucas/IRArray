@@ -473,12 +473,14 @@ namespace IRArray
                             if (Device_Check()) { return; }
                             Int = DeviceList.Count - 1;
                             //寫入 Config
+                            string Text = (string)DeviceList[Int].Text;
                             string Path = (string)DeviceList[Int].Value;
                             StructToConfig(Path, "Device");
                             PromptBox1.Import("已保存"); PromptBox1.Visibility = Visibility.Visible;
                             //更新選單
                             Device.Import_Ini(DeviceList);
                             Device.Import_Value(DeviceList.Count - 1);
+                            Trace(new LogInfo() { Module = Flag, Method = "Device_EventHandler", Category = "EventHandler", Message = string.Format("新增连线装置:{0}", Text) });
                         }
                         break;
                     case "Save":
@@ -486,16 +488,19 @@ namespace IRArray
                           //檢查參數是否正常
                             if (Device_Check()) { return; }
                             //寫入Config
+                            string Text = (string)DeviceList[Int].Text;
                             string Path = (string)DeviceList[Int].Value;
                             StructToConfig(Path, "Device");
                             PromptBox1.Import("已保存", true, false, false, "SerialPort_Save"); PromptBox1.Visibility = Visibility.Visible;
                             List2[0] = new ThreadInfo() { COM = Struct1.COM, BaudrRate = Struct1.BaudrRate, DataBits = (Struct1.UARTConfig == "8N1") ? 8 : 7, IsNet = (Struct1.Switch == 0), IsRest = true };
+                            Trace(new LogInfo() { Module = Flag, Method = "Device_EventHandler", Category = "EventHandler", Message = string.Format("儲存连线装置:{0} COM:{1} BaudrRate:{2} UARTConfig:{3}", Text, Struct1.COM, Struct1.BaudrRate, Struct1.UARTConfig) });
                         }
                         break;
                     case "Delete":
                         {
                             string Text = DeviceList[Int].Text;
                             PromptBox1.Import(string.Format("是否删除{0}", Text), false, true, false, "SerialPort_Delete"); PromptBox1.Visibility = Visibility.Visible;
+                            Trace(new LogInfo() { Module = Flag, Method = "Device_EventHandler", Category = "EventHandler", Message = string.Format("刪除连线装置:{0}", Text) });
                         }
                         break;
                     case "Changed":
@@ -517,7 +522,16 @@ namespace IRArray
                 {
                     case "Error": { Trace(new LogInfo() { File = "Error", Module = e.Value[0] as string, Method = e.Value[1] as string, Category = "EventHandler", Message = e.Value[2] as string }); } return;
                     case "Cancel": { Mode = Struct2.Mode; } break;
-                    case "Yes": { Struct2 = Screen.Export(); StructToConfig((string)DeviceList[Int].Value, "Screen"); Mode = Struct2.Mode; GetColorMap(); PromptBox1.Import("已保存"); PromptBox1.Visibility = Visibility.Visible; } break;
+                    case "Yes":
+                        {
+                            Struct2 = Screen.Export();
+                            StructToConfig((string)DeviceList[Int].Value, "Screen");
+                            Mode = Struct2.Mode; GetColorMap();
+                            PromptBox1.Import("已保存");
+                            PromptBox1.Visibility = Visibility.Visible;
+                            Trace(new LogInfo() { Module = Flag, Method = "Screen_EventHandler", Category = "EventHandler", Message = string.Format("画面设定 Mode:{0} Colormap:{1}", Mode, Struct2.Colormap) });
+                        }
+                        break;
                     //case "RadioButton1": { Mode = 0; } break;
                     //case "RadioButton2": { Mode = 1; } break;
                     //case "RadioButton3": { Mode = 3; } break;
@@ -596,6 +610,19 @@ namespace IRArray
 
                             Regional.Visibility = Visibility.Visible;
                             RegionalDetail.Visibility = Visibility.Collapsed;
+                            Trace(new LogInfo()
+                            {
+                                Module = Flag,
+                                Method = "RegionalDetail_EventHandler",
+                                Category = "EventHandler",
+                                Message = string.Format("区域设定:{0} 检测功能:{1} 移动事件侦测:{2}/{3} 人数设定:{4}/{5} 温度警报设定:{6}/High:{7}/Low:{8} 持续时间设定:{9} Email:{10}",
+                                Struct.Text, Struct.Switch,
+                                Struct.MoveEnable, Struct.Move,
+                                Struct.NumberEnable, Struct.Number,
+                                Struct.TemperatureEnable, Struct.High, Struct.Low,
+                                Struct.Time, 
+                                Struct.Email)
+                            });
                         }
                         break;
                     case "PeriodRemove": { PromptBox1.Import("是否删除此区域时间？", false, false, true, "PeriodRemove", -1); PromptBox1.Visibility = Visibility.Visible; } break;
@@ -620,6 +647,20 @@ namespace IRArray
                                 SerialPort.WriteLine(string.Format("ATSR={0:00},{1:000},{2:000},{3:00},{4:00}", Struct4.Shield, Struct4.Differ, Struct4.Pixels, Struct4.FPS, Struct4.FPS));
                             }
                             PromptBox1.Import("已保存"); PromptBox1.Visibility = Visibility.Visible;
+                            Trace(new LogInfo()
+                            {
+                                Module = Flag,
+                                Method = "Preferences_EventHandler",
+                                Category = "EventHandler",
+                                Message = string.Format("参数设定 高:{0} 像素:{1} 顶装:{2}/{3} 壁挂:{4}/{5} 噪声滤除:{6}/{7} 屏蔽圈数:{8}/{9} 物件显示条件:{10}/{11} 物件温差:{12}/{13}",
+                              Struct4.Depth, Struct4.Pixels,
+                              Struct4.TopEnable, Struct4.TopAngle,
+                              Struct4.HangEnable, Struct4.HangAngle,
+                              Struct4.NFEnable, Struct4.NF,
+                              Struct4.ShieldEnable, Struct4.Shield,
+                              Struct4.FPSEnable, Struct4.FPS,
+                              Struct4.DifferEnable, Struct4.Differ)
+                            });
                         }
                         break;
                 }

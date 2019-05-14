@@ -31,8 +31,8 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <Image Grid.Column="1" HorizontalAlignment="Center" Height="{Binding  Path=ImageSize,ElementName=my}" Source="{Binding Path=Source,ElementName=my}" Mouse.MouseUp="Clear_MouseUp">
-                        <Image.Style>
+                    <Image x:Name="Image" Grid.Column="1" HorizontalAlignment="Center" Height="{Binding  Path=ImageSize,ElementName=my}" Source="{Binding Path=Source,ElementName=my}" Visibility="Collapsed" Mouse.MouseUp="Clear_MouseUp">
+                        <!--<Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Visibility" Value="Visible"/>
                                 <Style.Triggers>
@@ -41,7 +41,7 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Image.Style>
+                        </Image.Style>-->
                     </Image>
                 </Grid>
             </Border>
@@ -51,6 +51,9 @@
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter TargetName="Border" Property="Background" Value="{Binding Path=ObjBackground,ElementName=my}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Image" Property="Visibility" Value="Visible"/>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>

@@ -16,7 +16,7 @@
         <SolidColorBrush x:Key="Red" Color="#F1726D"/>
         <SolidColorBrush x:Key="White" Color="#FFFFFF"/>
         <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
-            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="{DynamicResource Obj_Foreground}"/>
@@ -145,8 +145,11 @@
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
             <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="Height" Value="54"/>
             <Setter Property="Width" Value="480"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="DisplayMemberPath" Value="Text"/>
             <Setter Property="SelectedValuePath" Value="Value"/>
             <Setter Property="SelectedIndex" Value="0"/>
@@ -168,7 +171,7 @@
                             </VisualStateManager.VisualStateGroups>
                             <ToggleButton x:Name="ToggleButton" Grid.Column="2" Template="{StaticResource ComboBoxToggleButton}" Focusable="False" ClickMode="Press"
                             IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            <ContentPresenter x:Name="ContentSite" Margin="10,3" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="False"
+                            <ContentPresenter x:Name="ContentSite" Margin="20,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="False"
                             TextBlock.Foreground="{DynamicResource White}"
                             Content="{TemplateBinding SelectionBoxItem}"
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
@@ -218,7 +221,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                                    <Border x:Name="Border" Padding="2" SnapsToDevicePixels="True" Background="Transparent">
+                                    <Border x:Name="Border" Margin="0" Padding="20,11,0,11" SnapsToDevicePixels="True" Background="Transparent">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal"/>
@@ -408,41 +411,46 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Foreground" Value="{DynamicResource Obj_Foreground}"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="10"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="105"/>
-            <RowDefinition Height="64"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="64"/>
-            <RowDefinition Height="64"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="64"/>
-            <RowDefinition Height="64"/>
-            <RowDefinition Height="64"/>
-            <RowDefinition Height="85"/>
-            <RowDefinition Height="64"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="连线设备" Foreground="{DynamicResource Obj_Foreground}"/>
-        <ComboBox x:Name="ComboBox1" Grid.Column="2" Grid.Row="1" Style="{DynamicResource ComboBoxStyle}"/>
-        <RadioButton x:Name="RadioButton1" Grid.Column="2" Grid.Row="2" Content="Wi-Fi" Style="{DynamicResource RadioButtonStyle1}"/>
-        <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Text="IP Addresss" Foreground="{DynamicResource Obj_Foreground}"/>
-        <local:PHTextBox x:Name="PHTextBox1" Grid.Column="2" Grid.Row="3" Placeholder="请输入" Style="{DynamicResource PHTextBoxStyle}"/>
-        <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Text="Port" Foreground="{DynamicResource Obj_Foreground}"/>
-        <local:PHTextBox x:Name="PHTextBox2" Grid.Column="2" Grid.Row="4" Placeholder="请输入" Style="{DynamicResource PHTextBoxStyle}"/>
-        <RadioButton x:Name="RadioButton2" Grid.Column="2" Grid.Row="5" Content="UART" Style="{DynamicResource RadioButtonStyle1}"/>
-        <TextBlock Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" Text="COMNum" Foreground="{DynamicResource Obj_Foreground}"/>
-        <ComboBox x:Name="ComboBox2" Grid.Column="2" Grid.Row="6" Style="{DynamicResource ComboBoxStyle}"/>
-        <TextBlock Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" Text="Baud" Foreground="{DynamicResource Obj_Foreground}"/>
-        <ComboBox x:Name="ComboBox3" Grid.Column="2" Grid.Row="7" Style="{DynamicResource ComboBoxStyle}"/>
-        <TextBlock Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" Text="UART Config" Foreground="{DynamicResource Obj_Foreground}"/>
-        <ComboBox x:Name="ComboBox4" Grid.Column="2" Grid.Row="8" Style="{DynamicResource ComboBoxStyle}"/>
-        <Grid Grid.Column="2" Grid.Row="10" VerticalAlignment="Bottom">
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="连线设备" Style="{DynamicResource TextBlockStyle}"/>
+        <ComboBox x:Name="ComboBox1" Grid.Column="2" Grid.Row="1" Margin="0,15" Style="{DynamicResource ComboBoxStyle}"/>
+        <RadioButton x:Name="RadioButton1" Grid.Column="2" Grid.Row="2" Margin="0,15,0,5" Content="Wi-Fi" Style="{DynamicResource RadioButtonStyle1}"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="IP Addresss" Style="{DynamicResource TextBlockStyle}"/>
+        <local:PHTextBox x:Name="PHTextBox1" Grid.Column="2" Grid.Row="3" Margin="0,15" Placeholder="请输入" Style="{DynamicResource PHTextBoxStyle}"/>
+        <TextBlock Grid.Column="0" Grid.Row="4" Text="Port" Style="{DynamicResource TextBlockStyle}"/>
+        <local:PHTextBox x:Name="PHTextBox2" Grid.Column="2" Grid.Row="4" Margin="0,15" Placeholder="请输入" Style="{DynamicResource PHTextBoxStyle}"/>
+        <RadioButton x:Name="RadioButton2" Grid.Column="2" Grid.Row="5" Margin="0,15,0,5" Content="UART" Style="{DynamicResource RadioButtonStyle1}"/>
+        <TextBlock Grid.Column="0" Grid.Row="6" Text="COMNum" Style="{DynamicResource TextBlockStyle}"/>
+        <ComboBox x:Name="ComboBox2" Grid.Column="2" Grid.Row="6" Margin="0,15" Style="{DynamicResource ComboBoxStyle}"/>
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Baud" Style="{DynamicResource TextBlockStyle}"/>
+        <ComboBox x:Name="ComboBox3" Grid.Column="2" Grid.Row="7" Margin="0,15" Style="{DynamicResource ComboBoxStyle}"/>
+        <TextBlock Grid.Column="0" Grid.Row="8" Text="UART Config" Style="{DynamicResource TextBlockStyle}"/>
+        <ComboBox x:Name="ComboBox4" Grid.Column="2" Grid.Row="8" Margin="0,15" Style="{DynamicResource ComboBoxStyle}"/>
+        <Grid Grid.Column="2" Grid.Row="10" Margin="0,55,0,0" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
