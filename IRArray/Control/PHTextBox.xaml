@@ -31,29 +31,16 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <Image x:Name="Image" Grid.Column="1" HorizontalAlignment="Center" Height="{Binding  Path=ImageSize,ElementName=my}" Source="{Binding Path=Source,ElementName=my}" Visibility="Collapsed" Mouse.MouseUp="Clear_MouseUp">
-                        <!--<Image.Style>
-                            <Style TargetType="{x:Type Image}">
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource AncestorType=TextBox}}" Value="">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>-->
-                    </Image>
+                    <Image x:Name="Image" Grid.Column="1" HorizontalAlignment="Center" Height="{Binding  Path=ImageSize,ElementName=my}" Source="{Binding Path=Source,ElementName=my}" Visibility="Collapsed" Mouse.MouseUp="Clear_MouseUp"/>
                 </Grid>
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsFocused" Value="True">
                     <Setter TargetName="Border" Property="BorderBrush" Value="{Binding Path=FocusBrush,ElementName=my}"/>
+                    <Setter TargetName="Image" Property="Visibility" Value="Visible"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter TargetName="Border" Property="Background" Value="{Binding Path=ObjBackground,ElementName=my}"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter TargetName="Image" Property="Visibility" Value="Visible"/>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>

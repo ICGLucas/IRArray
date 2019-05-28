@@ -261,9 +261,9 @@ namespace IRArray
                 Thread7 = new System.Threading.Thread(Thread7_Run); Thread7.Start(); System.Threading.Thread.Sleep(100);
                 SerialPort_Ini();
 
-                this.MinHeight = this.MaxHeight = System.Windows.SystemParameters.MaximizedPrimaryScreenHeight;
-                this.MinWidth = this.MaxWidth = System.Windows.SystemParameters.MaximizedPrimaryScreenWidth;
-                this.WindowState = WindowState.Maximized;
+                //this.MinHeight = this.MaxHeight = System.Windows.SystemParameters.MaximizedPrimaryScreenHeight;
+                //this.MinWidth = this.MaxWidth = System.Windows.SystemParameters.MaximizedPrimaryScreenWidth;
+                //this.WindowState = WindowState.Maximized;
             }
             catch (Exception ex) { Trace(new LogInfo() { File = "Error", Module = Flag, Method = "Initialize", Category = "Initialize", Message = ex.Message }); }
         }
@@ -620,7 +620,7 @@ namespace IRArray
                                 Struct.MoveEnable, Struct.Move,
                                 Struct.NumberEnable, Struct.Number,
                                 Struct.TemperatureEnable, Struct.High, Struct.Low,
-                                Struct.Time, 
+                                Struct.Time,
                                 Struct.Email)
                             });
                         }
@@ -681,11 +681,7 @@ namespace IRArray
                     case "No_None": { } break;
                     case "Timer_None": { } break;
                     //case "Border_SerialPort_Save":
-                    case "Timer_SerialPort_Save":
-                        {
-                            SerialPort_Ini();
-                        }
-                        return;
+                    case "Timer_SerialPort_Save": { SerialPort_Ini(); } return;
                     case "Yes_SerialPort_Delete":
                         {
                             DeleteConfig(DeviceList[Int]);
@@ -731,10 +727,7 @@ namespace IRArray
         }
         private void PromptBoxStackPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                PromptBox1.Visibility = PromptBox2.Visibility = Visibility.Collapsed;
-            }
+            try { PromptBox1.Visibility = PromptBox2.Visibility = Visibility.Collapsed; }
             catch (Exception ex) { Trace(new LogInfo() { File = "Error", Module = Flag, Method = "PromptBoxStackPanel_MouseDown", Message = ex.Message }); }
         }
         #endregion
