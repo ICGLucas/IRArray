@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IRArray"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="480" Height="480" MinWidth="640" Width="640" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowState="Normal">
+        Title="IRArray" MinHeight="480" Height="480" MinWidth="640" Width="640" WindowStartupLocation="CenterOwner" WindowState="Normal">
     <!--<Window.Effect>
         <DropShadowEffect BlurRadius = "10" Color="Gray" ShadowDepth="2" Direction="-90"/>
     </Window.Effect>-->
@@ -53,13 +53,13 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <Thumb x:Name="thumbHeader" Grid.Column="0" Grid.ColumnSpan="10" Cursor="SizeAll"/>
+                    <!--<Thumb x:Name="thumbHeader" Grid.Column="0" Grid.ColumnSpan="10" Cursor="SizeAll"/>-->
                     <Image Grid.Column="0" Style="{DynamicResource ImageStyle_Logo}"/>
                     <RadioButton x:Name="Main" Grid.Column="2" Width="240" Content="主画面" IsChecked="True" Style="{StaticResource RadioButtonStyle1_1}"/>
                     <RadioButton x:Name="Setting" Grid.Column="3" Width="240" Content="显示输出设定" Style="{StaticResource RadioButtonStyle1_1}"/>
                     <RadioButton x:Name="Devices" Grid.Column="5" Width="211" Content="连线设置" Style="{StaticResource RadioButtonStyle2_1}"/>
-                    <Image x:Name="WinNarrow" Grid.Column="7" Style="{DynamicResource ImageStyle_Narrow}"/>
-                    <Image x:Name="WinClose" Grid.Column="8" Style="{DynamicResource ImageStyle_Close}"/>
+                    <Image x:Name="WinNarrow" Grid.Column="7" Style="{DynamicResource ImageStyle_Narrow}" Visibility="Collapsed"/>
+                    <Image x:Name="WinClose" Grid.Column="8" Style="{DynamicResource ImageStyle_Close}" Visibility="Collapsed"/>
                 </Grid>
                 <!--次選單-->
                 <local:MenuBar x:Name="MenuBar" Grid.Column="0" Grid.Row="1" Width="222" Visibility="Collapsed"/>
@@ -115,14 +115,14 @@
                 </Grid>
 
             </Grid>
-            <Thumb x:Name="thumbTop" Margin="15,0" VerticalAlignment="Top" Height="5" Cursor="SizeNS"/>
+            <!--<Thumb x:Name="thumbTop" Margin="15,0" VerticalAlignment="Top" Height="5" Cursor="SizeNS"/>
             <Thumb x:Name="thumbTopRight" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="15" Width="15" Cursor="SizeNESW"/>
             <Thumb x:Name="thumbRight" Margin="0,15" HorizontalAlignment="Right" Width="5" Cursor="SizeWE"/>
             <Thumb x:Name="thumbBottomRight" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="15" Width="15" Cursor="SizeNWSE"/>
             <Thumb x:Name="thumbBottom" Margin="15,0" VerticalAlignment="Bottom" Height="5" Cursor="SizeNS"/>
             <Thumb x:Name="thumbBottomLeft" Margin="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="15" Width="15" Cursor="SizeNESW"/>
             <Thumb x:Name="thumbLeft" Margin="0,15" HorizontalAlignment="Left" Width="5" Cursor="SizeWE"/>
-            <Thumb x:Name="thumbTopLeft" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="15" Width="15" Cursor="SizeNWSE"/>
+            <Thumb x:Name="thumbTopLeft" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="15" Width="15" Cursor="SizeNWSE"/>-->
         </Grid>
     </Border>
 </Window>

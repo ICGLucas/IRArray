@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IRArray"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="300" Height="986" Width="344">
+             d:DesignHeight="600" d:DesignWidth="300" Width="344">
+    <!--Height="986" Width="344"-->
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -121,8 +122,8 @@
             <local:PHTextBox x:Name="PHTextBox6" Grid.Column="2" Grid.Row="11" Width="Auto" MinLines="1" Placeholder="请输入Email" Style="{DynamicResource PHTextBoxStyle2}"/>
         </Grid>
         <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Margin="30,0" VerticalAlignment="Bottom">
-            <Button x:Name="Cancel" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Style="{DynamicResource ButtonStyle1}"/>
-            <Button x:Name="Yes" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Style="{DynamicResource ButtonStyle}"/>
+            <Button x:Name="Cancel" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Content="取消" Style="{DynamicResource ButtonStyle7}"/>
+            <Button x:Name="Yes" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Content="保存" Style="{DynamicResource ButtonStyle6}"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -222,7 +222,7 @@ namespace IRArray
                 this.FontSize = 18;
                 DeviceList = GetConfig();   //取得Config目錄下的 Config檔案
                 //沒有 Config狀態
-                //  有 Config狀態
+                //  有 Config狀態 
                 if (DeviceList.Count > 0) { ConfigToStruct((string)DeviceList[Int].Value); }
                 else
                 {
@@ -233,6 +233,8 @@ namespace IRArray
                 s = Encoding.GetBytes("s")[0]; S = Encoding.GetBytes("S")[0];
                 e = Encoding.GetBytes("e")[0]; E = Encoding.GetBytes("E")[0];
                 // ========== 系統事件 ==========
+                this.Closing += MainWindow_Closing;
+                // ========== Local系統事件 ==========
                 WinNarrow.MouseDown += Narrow_MouseDown;
                 WinClose.MouseDown += Close_MouseDown;
                 Canvas.MouseDown += Canvas_MouseDown;
@@ -267,6 +269,12 @@ namespace IRArray
             }
             catch (Exception ex) { Trace(new LogInfo() { File = "Error", Module = Flag, Method = "Initialize", Category = "Initialize", Message = ex.Message }); }
         }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            IsClose = true;
+        }
+
         private void Narrow_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
