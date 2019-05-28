@@ -736,12 +736,15 @@ namespace IRArray
             try
             {
                 RadioButton RadioButton = sender as RadioButton; if (RadioButton == null) { return; }
-                Monitor.Visibility = MenuBar.Visibility = ScrollViewer1.Visibility = ScrollViewer2.Visibility = Visibility.Collapsed;
+                //Monitor.Visibility = MenuBar.Visibility = ScrollViewer1.Visibility = ScrollViewer2.Visibility = Visibility.Collapsed;
+                Monitor.Visibility = MenuBar.Visibility = Grid2.Visibility = Border1.Visibility = Visibility.Collapsed;
                 switch (RadioButton.Name)
                 {
                     case "Main": { Monitor.Visibility = Visibility.Visible; } break;
-                    case "Setting": { Monitor.Visibility = MenuBar.Visibility = ScrollViewer1.Visibility = Visibility.Visible; } break;
-                    case "Devices": { ScrollViewer2.Visibility = Visibility.Visible; } break;
+                    //case "Setting": { Monitor.Visibility = MenuBar.Visibility = ScrollViewer1.Visibility = Visibility.Visible; } break;
+                    case "Setting": { Monitor.Visibility = MenuBar.Visibility = Grid2.Visibility = Visibility.Visible; } break;
+                    //case "Devices": { ScrollViewer2.Visibility = Visibility.Visible; } break;
+                    case "Devices": { Border1.Visibility = Visibility.Visible; } break;
                 }
             }
             catch (Exception ex) { Trace(new LogInfo() { File = "Error", Module = Flag, Method = "RadioButton_Click", Message = ex.Message }); }

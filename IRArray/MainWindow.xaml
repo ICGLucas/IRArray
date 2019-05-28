@@ -39,7 +39,6 @@
                     <RowDefinition Height="64"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <!--<Thumb x:Name="thumbHeader" Grid.RowSpan="1" Cursor="SizeAll" MouseDoubleClick="ThumbHeader_MouseDoubleClick"/>-->
                 <!--主選單-->
                 <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Stretch" Background="{DynamicResource MenuBar_Backgroud}">
                     <Grid.ColumnDefinitions>
@@ -54,6 +53,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
+                    <Thumb x:Name="thumbHeader" Grid.Column="0" Grid.ColumnSpan="10" Cursor="SizeAll"/>
                     <Image Grid.Column="0" Style="{DynamicResource ImageStyle_Logo}"/>
                     <RadioButton x:Name="Main" Grid.Column="2" Width="240" Content="主画面" IsChecked="True" Style="{StaticResource RadioButtonStyle1_1}"/>
                     <RadioButton x:Name="Setting" Grid.Column="3" Width="240" Content="显示输出设定" Style="{StaticResource RadioButtonStyle1_1}"/>
@@ -64,14 +64,14 @@
                 <!--次選單-->
                 <local:MenuBar x:Name="MenuBar" Grid.Column="0" Grid.Row="1" Width="222" Visibility="Collapsed"/>
                 <!--選單內容與設定-->
-                <ScrollViewer x:Name="ScrollViewer1" Grid.Column="1" Grid.Row="1" Width="344" Style="{DynamicResource ScrollViewerStyle}" Visibility="Collapsed">
-                    <Grid Background="{DynamicResource MenuBar_Backgroud}">
-                        <local:Screen x:Name="Screen" Visibility="Visible"/>
-                        <local:Regional x:Name="Regional" Visibility="Collapsed"/>
-                        <local:RegionalDetail x:Name="RegionalDetail" MaxHeight="1280" Visibility="Collapsed"/>
-                        <local:Preferences x:Name="Preferences" Visibility="Collapsed"/>
-                    </Grid>
-                </ScrollViewer>
+                <!--<ScrollViewer x:Name="ScrollViewer1" Grid.Column="1" Grid.Row="1" Width="344" Style="{DynamicResource ScrollViewerStyle}" Visibility="Collapsed">-->
+                <Grid x:Name="Grid2" Grid.Column="1" Grid.Row="1" Width="344" Background="{DynamicResource MenuBar_Backgroud}" Visibility="Collapsed">
+                    <local:Screen x:Name="Screen" Visibility="Visible"/>
+                    <local:Regional x:Name="Regional" Visibility="Collapsed"/>
+                    <local:RegionalDetail x:Name="RegionalDetail" MaxHeight="1280" Visibility="Collapsed"/>
+                    <local:Preferences x:Name="Preferences" Visibility="Collapsed"/>
+                </Grid>
+                <!--</ScrollViewer>-->
                 <!--繪製圖形-->
                 <Grid Grid.Column="2" Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -92,11 +92,11 @@
                     <local:TextPath Grid.Column="1" Style="{DynamicResource TextPathStyle}"/>
                 </Grid>
                 <!--裝置設定-->
-                <ScrollViewer x:Name="ScrollViewer2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Style="{DynamicResource ScrollViewerStyle}" Visibility="Collapsed">
-                    <Border Background="#00FFFFFF">
-                        <local:Device x:Name="Device" Style="{DynamicResource DeviceStyle}"/>
-                    </Border>
-                </ScrollViewer>
+                <!--<ScrollViewer x:Name="ScrollViewer2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Style="{DynamicResource ScrollViewerStyle}" Visibility="Collapsed">-->
+                <Border x:Name="Border1" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Background="#00FFFFFF" Visibility="Collapsed">
+                    <local:Device x:Name="Device" Style="{DynamicResource DeviceStyle}"/>
+                </Border>
+                <!--</ScrollViewer>-->
                 <!--告警顯示-->
                 <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2">
                     <Grid.ColumnDefinitions>
